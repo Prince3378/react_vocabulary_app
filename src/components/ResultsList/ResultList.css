@@ -1,0 +1,44 @@
+.bal {
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+}
+
+.bal-1 {
+  background-image: url(./ResultsImg/1.png);
+}
+
+.bal-2 {
+  background-image: url(./ResultsImg/2.png);
+}
+
+.bal-3 {
+  background-image: url(./ResultsImg/3.png);
+}
+
+.bal-4 {
+  background-image: url(./ResultsImg/4.png);
+}
+
+.bal-5 {
+  background-image: url(./ResultsImg/5.png);
+}
+
+.result-rate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-text {
+  font-size: 2rem;
+}
+
+.table-item {
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.table-item:hover {
+  background-color: rgb(189, 243, 243);
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "id": 0,
+    "translation": "flower",
+    "word": "квітка"
+  },
+  {
+    "id": 1,
+    "translation": "pen",
+    "word": "ручка"
+  },
+  {
+    "id": 2,
+    "translation": "coffee",
+    "word": "кава"
+  },
+  {
+    "id": 3,
+    "translation": "bike",
+    "word": "велосипед"
+  },
+  {
+    "id": 4,
+    "translation": "color",
+    "word": "колір"
+  },
+  {
+    "id": 5,
+    "translation": "star",
+    "word": "зірка"
+  },
+  {
+    "id": 6,
+    "translation": "laptop",
+    "word": "ноутбук"
+  },
+  {
+    "id": 7,
+    "translation": "country",
+    "word": "країна"
+  },
+  {
+    "id": 8,
+    "translation": "man",
+    "word": "чоловік"
+  },
+  {
+    "id": 9,
+    "translation": "car",
+    "word": "автомобіль"
+  },
+  {
+    "id": 10,
+    "translation": "cup",
+    "word": "чашка"
+  }
+]

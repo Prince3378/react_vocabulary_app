@@ -1,0 +1,41 @@
+.test-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  height: 10rem;
+  width: 15rem;
+  border: 2px solid #3e8ed0;
+  background-color: #86c6fa;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.5s;
+}
+
+.test-btn:hover {
+  background-color: #3e8ed0;
+}
+
+.second-step {
+  height: 75vh;
+}
+
+.field-btn {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 100px;
+}
+
+.test-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.link-text {
+  font-size: 35px;
+  display: block;
+  color: black;
+}

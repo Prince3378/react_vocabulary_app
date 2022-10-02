@@ -1,3 +1,9 @@
+# React_vocabulary_app
+
+[DEMO LINK](https://prince3378.github.io/react_vocabulary_app/)
+
+In this project used: HTML, CSS, Bulma, ClassNames, JavaScript, TypeScript, React.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

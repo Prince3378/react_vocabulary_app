@@ -1,0 +1,22 @@
+[
+  {
+    "id": 0,
+    "link": "",
+    "title": "Онлайн словник"
+  },
+  {
+    "id": 1,
+    "link": "new-words",
+    "title": "Додати нові слова"
+  },
+  {
+    "id": 2,
+    "link": "knowledge-test",
+    "title": "Перевірка знань"
+  },
+  {
+    "id": 3,
+    "link": "results",
+    "title": "Результати"
+  }
+]

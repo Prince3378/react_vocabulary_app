@@ -1,0 +1,7 @@
+.is-medium {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgb(183, 238, 238);
+  z-index: 2;
+}
