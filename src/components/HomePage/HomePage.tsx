@@ -1,27 +1,24 @@
 import 'bulma/css/bulma.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Vocabular } from '../../types/Vocabular';
 import './HomePage.css';
+import { deleteItem, removeWords } from '../../store/wordsSlice';
+import { useAppDispatch, useAppSelector } from '../../hook';
 
 type Props = {
-  words: Vocabular[],
   setSelectedId: (id: number) => void,
-  setWords: (arr: Vocabular[]) => void,
 };
 
 export const HomePage: React.FC<Props> = ({
-  words, setSelectedId, setWords,
+  setSelectedId,
 }) => {
+  const words: Vocabular[] = useAppSelector(state => state.words.words);
   const [visibleWord, setVisibleWord] = useState<Vocabular[]>([...words]);
-  // const [typeSelect, setTypeSelect] = useState('Initial');
 
-  const deleteWord = (id: number) => {
-    const resultList = words.filter(word => word.id !== id);
+  const dispatch = useAppDispatch();
 
-    setWords(resultList);
-    setVisibleWord(resultList);
-  };
+  const deleteAll = () => dispatch(removeWords([]));
 
   const visibleList = (str: string) => {
     switch (str) {
@@ -49,6 +46,10 @@ export const HomePage: React.FC<Props> = ({
       break;
     }
   };
+
+  useEffect(() => {
+    setVisibleWord([...words]);
+  }, [words]);
 
   return (
     <div className="box is-background">
@@ -96,7 +97,7 @@ export const HomePage: React.FC<Props> = ({
           </div>
           <button
             className="button is-danger"
-            onClick={() => setWords([])}
+            onClick={() => deleteAll()}
           >
             Видалити всі
           </button>
@@ -131,7 +132,7 @@ export const HomePage: React.FC<Props> = ({
                     <div className="is-flex is-justify-content-center">
                       <button
                         className="delete"
-                        onClick={() => deleteWord(word.id)}
+                        onClick={() => dispatch(deleteItem(word.id))}
                       >
                       </button>
                     </div>

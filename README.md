@@ -2,7 +2,7 @@
 
 [DEMO LINK](https://prince3378.github.io/react_vocabulary_app/)
 
-In this project used: HTML, CSS, Bulma, ClassNames, JavaScript, TypeScript, React.
+In this project used: HTML, CSS, Bulma, ClassNames, JavaScript, TypeScript, React, Redux Toolkit.
 
 # Getting Started with Create React App
 

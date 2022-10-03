@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hook';
 import { Result } from '../../types/Result';
 import { Results } from '../../types/Results';
 import { Vocabular } from '../../types/Vocabular';
 import './Testing.css';
 
 type Props = {
-    words: Vocabular[],
     setResults: (res: Results[]) => void,
     results: Results[],
     setWinner: (state: boolean) => void,
@@ -14,14 +14,17 @@ type Props = {
 };
 
 export const Testing: React.FC<Props> = ({
-  words, setResults, results, setWinner, setSelectedId,
+  setResults, results, setWinner, setSelectedId,
 }) => {
   const [user, setUser] = useState('');
   const [isName, setIsName] = useState<boolean>(true);
+
   const [isGame, setIsGame] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
 
-  const random = (min: number, max: number, count: number) => {
+  const words: Vocabular[] = useAppSelector(state => state.words.words);
+
+  const random = useCallback((min: number, max: number, count: number) => {
     const arr: Vocabular[] = [];
 
     if (words.length < 10) {
@@ -37,7 +40,7 @@ export const Testing: React.FC<Props> = ({
     }
 
     return arr;
-  };
+  }, [Math.floor]);
 
   const [visible, setVisible] = useState([...words]);
   const [timer, setTimer] = useState<number>(0);
@@ -52,7 +55,7 @@ export const Testing: React.FC<Props> = ({
 
   const [result, setResult] = useState<Result[]>([]);
 
-  const firstStart = () => {
+  const firstStart = useCallback(() => {
     if (user.length === 0) {
       setIsName(false);
 
@@ -60,7 +63,7 @@ export const Testing: React.FC<Props> = ({
     }
     setIsGame(true);
     setTimer(Date.now());
-  };
+  }, [user]);
 
   const getNewWord = (id: number, wi: number) => {
     const lastWord = {

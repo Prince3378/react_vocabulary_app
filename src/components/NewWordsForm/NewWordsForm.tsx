@@ -3,22 +3,19 @@ import { Vocabular } from '../../types/Vocabular';
 import listWords from './ReadyListWords.json';
 
 import '../NewWordsForm/NewWordsForm.css';
+import { addWords, addListWords } from '../../store/wordsSlice';
+import { useAppDispatch, useAppSelector } from '../../hook';
 
-type Props = {
-    words: Vocabular[],
-    setWords: (word: any) => void,
-};
-
-export const NewWordsForm: React.FC<Props> = ({ words, setWords }) => {
-  const [wordUA, setWordUA] = useState('');
+export const NewWordsForm: React.FC = () => {
+  const [word, setWord] = useState('');
   const [isWordUa, setIsWordUa] = useState<boolean>(false);
 
-  const [wordENG, setWordENG] = useState('');
+  const [translation, setTranslation] = useState('');
   const [isWordEng, setIsWordEng] = useState<boolean>(false);
 
   const [isOnTheList, setIsOnTheList] = useState<boolean>(false);
 
-  const [initialId, setInitialId] = useState<number>(() => {
+  const [id, setId] = useState<number>(() => {
     const idFromStor = localStorage.getItem('initialId');
 
     try {
@@ -29,38 +26,8 @@ export const NewWordsForm: React.FC<Props> = ({ words, setWords }) => {
   });
 
   useEffect(() => {
-    localStorage.setItem('initialId', JSON.stringify(initialId));
-  }, [initialId]);
-
-  const addNewWord = () => {
-    if (words
-      .some(word => word.word === wordUA) || words
-      .some(word => word.translation === wordENG)) {
-      setIsOnTheList(true);
-      setWordUA('');
-      setWordENG('');
-
-      return;
-    }
-    setIsWordUa(true);
-    setIsWordEng(true);
-
-    const newWord: Vocabular = {
-      id: initialId,
-      word: wordUA,
-      translation: wordENG,
-    };
-
-    if (wordUA && wordENG) {
-      setWords([...words, newWord]);
-      setIsWordUa(false);
-      setIsWordEng(false);
-      setWordUA('');
-      setWordENG('');
-      setInitialId(initialId + 1);
-      setIsOnTheList(false);
-    }
-  };
+    localStorage.setItem('initialId', JSON.stringify(id));
+  }, [id]);
 
   const handleEvent = (e: React.ChangeEvent<HTMLInputElement>) => {
     // eslint-disable-next-line no-shadow
@@ -68,12 +35,12 @@ export const NewWordsForm: React.FC<Props> = ({ words, setWords }) => {
 
     switch (name) {
     case 'UAword':
-      setWordUA(value);
+      setWord(value);
       setIsWordUa(false);
       break;
 
     case 'ENGword':
-      setWordENG(value);
+      setTranslation(value);
       setIsWordEng(false);
       break;
 
@@ -82,16 +49,42 @@ export const NewWordsForm: React.FC<Props> = ({ words, setWords }) => {
     }
   };
 
-  const addListWords = () => {
+  const addListWord = () => {
     if (words.length === 0) {
-      setWords([...listWords]);
+      dispatch(addListWords(listWords));
 
       return;
     }
 
     const arr = listWords.filter(el => words.every(item => item.id !== el.id));
 
-    setWords([...words, ...arr]);
+    dispatch(addListWords(arr));
+  };
+
+  const words: Vocabular[] = useAppSelector(state => state.words.words);
+  const dispatch = useAppDispatch();
+  const addWord = () => {
+    if (words
+      .some(w => w.word === word) || words
+      .some(w => w.translation === translation)) {
+      setIsOnTheList(true);
+      setWord('');
+      setTranslation('');
+
+      return;
+    }
+    setIsWordUa(true);
+    setIsWordEng(true);
+
+    if (word && translation) {
+      dispatch(addWords({ id, word, translation }));
+      setIsWordUa(false);
+      setIsWordEng(false);
+      setWord('');
+      setTranslation('');
+      setId(id + 1);
+      setIsOnTheList(false);
+    }
   };
 
   return (
@@ -99,7 +92,7 @@ export const NewWordsForm: React.FC<Props> = ({ words, setWords }) => {
       <div className="box">
         <form onSubmit={(e) => {
           e.preventDefault();
-          addNewWord();
+          addWord();
         }}>
           <div className="field">
             <p className="control has-icons-left has-icons-right">
@@ -107,7 +100,7 @@ export const NewWordsForm: React.FC<Props> = ({ words, setWords }) => {
                 className="input"
                 type="text"
                 name="UAword"
-                value={wordUA}
+                value={word}
                 onChange={handleEvent}
                 placeholder="Введіть нове слово"
                 // eslint-disable-next-line max-len
@@ -127,7 +120,7 @@ export const NewWordsForm: React.FC<Props> = ({ words, setWords }) => {
                 className="input"
                 type="text"
                 name="ENGword"
-                value={wordENG}
+                value={translation}
                 onChange={handleEvent}
                 placeholder="Введіть переклад"
                 // eslint-disable-next-line max-len
@@ -170,7 +163,7 @@ export const NewWordsForm: React.FC<Props> = ({ words, setWords }) => {
               <button
                 className="button is-info"
                 type="button"
-                onClick={() => addListWords()}
+                onClick={() => addListWord()}
               >
                 Додати список
               </button>

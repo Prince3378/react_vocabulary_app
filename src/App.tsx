@@ -13,19 +13,22 @@ import { ResultsList } from './components/ResultsList/ResultsList';
 import { Testing } from './components/Testing/Testing';
 import { Results } from './types/Results';
 import { Vocabular } from './types/Vocabular';
+import { useAppDispatch, useAppSelector } from './hook';
+import { addListWords } from './store/wordsSlice';
 
 export const App = () => {
   const [winner, setWinner] = useState<boolean>(false);
 
-  const [words, setWords] = useState<Vocabular[]>(() => {
-    const wordsFromStor = localStorage.getItem('words');
+  const words: Vocabular[] = useAppSelector(state => state.words.words);
+  const dispatch = useAppDispatch();
 
-    try {
-      return wordsFromStor ? JSON.parse(wordsFromStor) : [];
-    } catch (error) {
-      return [];
+  useEffect(() => {
+    const currentWords = localStorage.getItem('words');
+
+    if (currentWords) {
+      dispatch(addListWords(JSON.parse(currentWords)));
     }
-  });
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('words', JSON.stringify(words));
@@ -67,19 +70,16 @@ export const App = () => {
           <Route
             path="/"
             element={<HomePage
-              words={words}
               setSelectedId={setSelectedId}
-              setWords={setWords}
             />}
           />
           <Route
             path="/new-words"
-            element={<NewWordsForm words={words} setWords={setWords} />}
+            element={<NewWordsForm />}
           />
           <Route
             path="/knowledge-test"
             element={<Testing
-              words={words}
               setResults={setResults}
               results={results}
               setWinner={setWinner}
