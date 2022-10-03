@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react_vocabulary_app/static/css/main.353f10bf.css",
-    "main.js": "/react_vocabulary_app/static/js/main.50f81ad8.js",
+    "main.js": "/react_vocabulary_app/static/js/main.698fef56.js",
     "static/media/Background.png": "/react_vocabulary_app/static/media/Background.258b0af452b53d2236bd.png",
     "static/media/4.png": "/react_vocabulary_app/static/media/4.aacf396e4472f192ce16.png",
     "static/media/1.png": "/react_vocabulary_app/static/media/1.bc3af88367b25906c5a5.png",
@@ -10,10 +10,10 @@
     "static/media/3.png": "/react_vocabulary_app/static/media/3.62935f8ef29b483aa098.png",
     "index.html": "/react_vocabulary_app/index.html",
     "main.353f10bf.css.map": "/react_vocabulary_app/static/css/main.353f10bf.css.map",
-    "main.50f81ad8.js.map": "/react_vocabulary_app/static/js/main.50f81ad8.js.map"
+    "main.698fef56.js.map": "/react_vocabulary_app/static/js/main.698fef56.js.map"
   },
   "entrypoints": [
     "static/css/main.353f10bf.css",
-    "static/js/main.50f81ad8.js"
+    "static/js/main.698fef56.js"
   ]
 }
